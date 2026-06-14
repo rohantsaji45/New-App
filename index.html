@@ -110,45 +110,58 @@ button{
 // CHANGE THIS TO YOUR SPECIAL DATE
 const correctPassword = "03092022";
 
-function unlockLove(){
+function unlockLove() {
 
-    const entered = document.getElementById("password").value;
+    const entered = document.getElementById("password").value.trim();
 
-    if(entered === correctPassword){
+    console.log("Entered:", entered);
+    console.log("Expected:", correctPassword);
 
-        document.getElementById("loginBox").style.display="none";
+    if (entered === correctPassword) {
+
+        console.log("Password correct!");
+
+        document.getElementById("loginBox").style.display = "none";
 
         const loveScreen = document.getElementById("loveScreen");
-        loveScreen.style.display="flex";
+        loveScreen.style.display = "flex";
 
-        document.getElementById("song").play();
+        const song = document.getElementById("song");
+
+        song.play().catch(error => {
+            console.log("Audio error:", error);
+        });
 
         createHearts();
 
-    }else{
+    } else {
         alert("That's not our special date ❤️");
     }
 }
 
-function createHearts(){
+function createHearts() {
 
-    setInterval(()=>{
+    setInterval(() => {
 
         const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = ["❤️","💕","💖","💘","💝"][Math.floor(Math.random()*5)];
 
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.fontSize = (20 + Math.random()*40) + "px";
+        heart.className = "heart";
+
+        heart.innerHTML =
+            ["❤️","💕","💖","💘","💝"][Math.floor(Math.random() * 5)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (20 + Math.random() * 40) + "px";
 
         document.body.appendChild(heart);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             heart.remove();
-        },8000);
+        }, 8000);
 
-    },150);
+    }, 150);
 }
+
 </script>
 
 </body>
