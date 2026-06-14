@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    z-index:10;
+}
+
+input{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    width:220px;
+    text-align:center;
+    font-size:16px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+#loveScreen{
+    display:none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    color:white;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:5;
+}
+
+.message{
+    font-size:2rem;
+    max-width:800px;
+    padding:20px;
+    font-weight:bold;
+}
+
+.heart{
+    position:absolute;
+    font-size:30px;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="loginBox">
+    <h2>❤️ Enter Our Special Date ❤️</h2>
+    <input type="password" id="password" placeholder="DDMMYYYY">
+    <br>
+    <button onclick="unlockLove()">Open</button>
+</div>
+
+<div id="loveScreen">
+    <div class="message">
+        Whenever I can't answer the phone, remember that I love you more than words can say ❤️
+    </div>
+</div>
+
+<audio id="song" loop>
+    <source src="inthandham.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// CHANGE THIS TO YOUR SPECIAL DATE
+const correctPassword = "03092022";
+
+function unlockLove(){
+
+    const entered = document.getElementById("password").value;
+
+    if(entered === correctPassword){
+
+        document.getElementById("loginBox").style.display="none";
+
+        const loveScreen = document.getElementById("loveScreen");
+        loveScreen.style.display="flex";
+
+        document.getElementById("song").play();
+
+        createHearts();
+
+    }else{
+        alert("That's not our special date ❤️");
+    }
+}
+
+function createHearts(){
+
+    setInterval(()=>{
+
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = ["❤️","💕","💖","💘","💝"][Math.floor(Math.random()*5)];
+
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.fontSize = (20 + Math.random()*40) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },8000);
+
+    },150);
+}
+</script>
+
+</body>
+</html>
