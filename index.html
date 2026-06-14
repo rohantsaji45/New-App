@@ -132,24 +132,30 @@ function unlockLove(){
     }
 }
 
-function createHearts(){
+function createHearts() {
 
-    setInterval(()=>{
+    const emojis = ["❤️","💕","💖","💘","💞","🥰"];
+
+    setInterval(() => {
 
         const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = ["❤️","💕","💖","💘","💝"][Math.floor(Math.random()*5)];
 
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.fontSize = (20 + Math.random()*40) + "px";
+        heart.classList.add("heart");
+        heart.innerHTML =
+            emojis[Math.floor(Math.random() * emojis.length)];
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
 
         document.body.appendChild(heart);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             heart.remove();
-        },8000);
+        }, 7000);
 
-    },150);
+    }, 100);
 }
 </script>
 
