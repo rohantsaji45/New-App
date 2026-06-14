@@ -132,30 +132,57 @@ function unlockLove(){
     }
 }
 
-function createHearts() {
+ffunction createHearts() {
 
-    const emojis = ["❤️","💕","💖","💘","💞","🥰"];
+    const emojis = ["❤️","💕","💖","💘","💞","🥰","😍"];
 
     setInterval(() => {
 
-        const heart = document.createElement("div");
+        for(let i = 0; i < 8; i++) {
 
-        heart.classList.add("heart");
-        heart.innerHTML =
-            emojis[Math.floor(Math.random() * emojis.length)];
+            const heart = document.createElement("div");
 
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = window.innerHeight + "px";
-        heart.style.animationDuration =
-            (3 + Math.random() * 4) + "s";
+            heart.innerHTML =
+                emojis[Math.floor(Math.random() * emojis.length)];
 
-        document.body.appendChild(heart);
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
 
-        setTimeout(() => {
-            heart.remove();
-        }, 7000);
+            heart.style.fontSize =
+                (20 + Math.random() * 60) + "px";
 
-    }, 100);
+            heart.style.zIndex = "9999";
+
+            document.body.appendChild(heart);
+
+            heart.animate(
+                [
+                    {
+                        transform: "scale(0)",
+                        opacity: 0
+                    },
+                    {
+                        transform: "scale(1.3)",
+                        opacity: 1
+                    },
+                    {
+                        transform: "scale(1)",
+                        opacity: 1
+                    }
+                ],
+                {
+                    duration: 1500,
+                    easing: "ease-out"
+                }
+            );
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+    }, 150);
 }
 </script>
 
